@@ -1,0 +1,38 @@
+  clc;
+clear all;
+close all;
+% Filter Specifications
+fs = 1000;             % Sampling frequency (Hz)
+f_cutoff = 100;        % Cutoff frequency (Hz)
+filter_order = 50;     % Filter order
+
+% Desired frequency response
+desired_amplitude = [1, 1, 0, 0]; % Amplitude at [0, f_cutoff, f_cutoff+50, fs/2]
+frequency_points = [0, f_cutoff, f_cutoff+50, fs/2] / (fs/2);
+
+% Design filter using Least Squares Estimation
+filter_coefficients = firls(filter_order, frequency_points, desired_amplitude);
+
+% Frequency response plot
+freqz(filter_coefficients, 1, 1024, fs);
+
+% Display the impulse response 
+figure;
+stem(0:filter_order, filter_coefficients);
+title('Filter Impulse Response');
+xlabel('Sample');
+ylabel('Amplitude');
+
+% Use the designed filter on a signal 
+input_signal = randn(1, 1000); 
+filtered_signal = filter(filter_coefficients, 1, input_signal);
+
+% Plot original and filtered signals
+figure;
+subplot(2, 1, 1);
+plot(input_signal);
+title('Original Signal');
+
+subplot(2, 1, 2);
+plot(filtered_signal);
+title('Filtered Signal');

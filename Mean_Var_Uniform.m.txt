@@ -1,0 +1,28 @@
+clc;
+clear all;
+close all;
+
+% Parameters
+numSamples = 100000; % Number of data samples
+lowerBound = 2;    % Lower bound of the desired interval
+upperBound = 8;    % Upper bound of the desired interval
+
+% Generate uniform random variables in the specified interval
+uniformVariables = lowerBound + (upperBound - lowerBound) * rand(numSamples, 1);
+
+% Calculate mean and variance (for comparison)
+meanUniform = mean(uniformVariables);
+varUniform = var(uniformVariables);
+
+% Display results
+fprintf('Generated Uniform Random Variables:\n');
+fprintf('Mean: %.4f\n', meanUniform);
+fprintf('Variance: %.4f\n', varUniform);
+
+histfit(uniformVariables,20,"rayleigh")
+% Create a histogram of the generated data
+edges = linspace(lowerBound, upperBound, 20); % Adjust as needed
+histogram(uniformVariables, edges, 'Normalization', 'probability');
+xlabel('Uniform Random Variable');
+ylabel('Probability');
+title('Histogram of Uniform Random Variables');

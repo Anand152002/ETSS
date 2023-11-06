@@ -1,0 +1,24 @@
+% Example of Unstable Sys
+clc;
+clear all;
+close all;
+
+% Example signal
+n = 0:10;
+x = (0.9).^n;
+
+% Example system transfer function (H(z) = (z) / (z - 2))
+num = [1];
+den = [1, -2];
+
+% Compute Z-transform
+z_value = 0.8;
+Xz_value = z_transform(x, n, z_value);
+
+% Check Stability
+isStable = check_stability(num, den);
+disp(['System Stability: ', num2str(isStable)]);
+
+% Frequency Response Analysis
+Fs = 1000; % Example sampling frequency
+[freq_response, frequencies] = freq_response(num, den, Fs);

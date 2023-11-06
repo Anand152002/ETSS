@@ -1,0 +1,33 @@
+% Bayesian estimation using a beta-binomial model
+
+% Number of trials
+n = 50;
+
+% Number of successes (observed outcomes)
+k = 20;
+
+% Prior parameters for the beta distribution
+alpha_prior = 1;
+beta_prior = 1;
+
+% Update parameters based on observed data
+alpha_posterior = alpha_prior + k;
+beta_posterior = beta_prior + n - k;
+
+% Generate a range of probabilities for plotting
+probabilities = linspace(0, 1, 1000);
+
+% Calculate the prior and posterior beta distributions
+prior_distribution = betapdf(probabilities, alpha_prior, beta_prior);
+posterior_distribution = betapdf(probabilities, alpha_posterior, beta_posterior);
+
+% Plot the results
+figure;
+plot(probabilities, prior_distribution, 'r-', 'LineWidth', 2);
+hold on;
+plot(probabilities, posterior_distribution, 'b-', 'LineWidth', 2);
+xlabel('Probability of Success');
+ylabel('Probability Density');
+title('Bayesian Estimation');
+legend('Prior', 'Posterior');
+hold off;

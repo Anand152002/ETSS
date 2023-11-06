@@ -1,0 +1,27 @@
+clc;
+clear all;
+close all;
+% Generate example data
+x = [1, 2, 3, 4, 5]';
+y = 2*x + 1 + 0.5*randn(size(x)); % Linear relationship with some noise
+
+% Perform linear regression using least squares
+A = [x, ones(size(x))]; % Design matrix [x, 1]
+coefficients = A\y; % Using backslash for least squares solution
+
+% Extract slope and intercept from coefficients
+slope = coefficients(1);
+intercept = coefficients(2);
+
+% Plot the data and the fitted line
+figure;
+scatter(x, y, 'o', 'DisplayName', 'Data');
+hold on;
+plot(x, slope*x + intercept, 'r', 'DisplayName', 'Fitted Line');
+legend('Location', 'northwest');
+xlabel('x');
+ylabel('y');
+title('Linear Regression using Least Squares');
+
+% Display the regression equation
+fprintf('Regression Equation: y = %.4fx + %.4f\n', slope, intercept);

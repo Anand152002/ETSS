@@ -1,0 +1,10 @@
+function Xz = z_transform(x, n, z)
+    % Computes the Z-transform of the discrete-time signal x(n) at points z
+    
+    % Inputs:
+    % x: input signal
+    % n: time indices corresponding to the signal x
+    % z: Z-transform variable
+    
+    Xz = sum(x .* z.^(-n));
+end

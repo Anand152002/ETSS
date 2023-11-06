@@ -1,0 +1,10 @@
+function isStable = check_stability(num, den)
+    % Checks the stability of a system based on its numerator (num) and denominator (den) polynomials
+    
+    % Inputs:
+    % num: numerator polynomial coefficients
+    % den: denominator polynomial coefficients
+    
+    poles = roots(den);
+    isStable = all(abs(poles) < 1);
+end

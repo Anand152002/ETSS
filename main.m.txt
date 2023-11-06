@@ -1,0 +1,11 @@
+clc;
+clear all;
+close all;
+
+% Generate a random signal for testing
+fs = 500; % Sample rate in Hz
+t = 0:1/fs:1; % Time vector
+signal = randn(size(t)); % Random white noise signal
+plot(signal);
+% Call the power spectrum estimation function
+power_spectrum_estimation(signal, fs);

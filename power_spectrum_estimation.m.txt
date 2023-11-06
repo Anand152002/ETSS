@@ -1,0 +1,10 @@
+function power_spectrum_estimation(signal, fs)
+    % Compute the power spectrum using the periodogram
+    [pxx, f] = periodogram(signal,[], [],  fs);
+
+    % Plot the power spectrum
+    plot(f, 10*log10(pxx));
+    xlabel('Frequency (Hz)');
+    ylabel('Power/Frequency (dB/Hz)');
+    title('Power Spectrum Estimation (Periodogram)');
+end

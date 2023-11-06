@@ -1,0 +1,21 @@
+function [H, f] = freq_response(num, den, Fs)
+    % Computes the frequency response of a system
+    
+    % Inputs:
+    % num: numerator polynomial coefficients
+    % den: denominator polynomial coefficients
+    % Fs: sampling frequency
+    
+    omega = linspace(0, pi, 1000);
+    f = omega * Fs / (2 * pi);
+    
+    H = freqz(num, den, omega);
+    
+    % Plot frequency response
+    figure;
+    plot(f, 20*log10(abs(H)));
+    title('Frequency Response');
+    xlabel('Frequency (Hz)');
+    ylabel('Magnitude (dB)');
+    grid on;
+end

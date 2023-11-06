@@ -1,0 +1,28 @@
+clc;
+clear all;
+close all;
+
+% Parameters
+numSamples = 10^5; % Number of data samples
+scaleParameter = 2; % Scale parameter of the Rayleigh distribution
+
+% Generate Rayleigh random variables
+rayleighVariables = raylrnd(scaleParameter, numSamples, 1);
+
+% Calculate mean and variance (for comparison)
+meanRayleigh = mean(rayleighVariables);
+varRayleigh = var(rayleighVariables);
+
+% Display results
+fprintf('Generated Rayleigh Random Variables:\n');
+fprintf('Mean: %.4f\n', meanRayleigh);
+fprintf('Variance: %.4f\n', varRayleigh);
+
+histfit(rayleighVariables,20,"rayleigh")
+
+% Create a histogram of the generated data
+edges = linspace(0, max(rayleighVariables), 200); % Adjust as needed
+histogram(rayleighVariables, edges, 'Normalization', 'probability');
+xlabel('Rayleigh Random Variable');
+ylabel('Probability');
+title('Histogram of Rayleigh Random Variables');

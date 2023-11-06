@@ -1,0 +1,56 @@
+clc;
+clear all;
+close all;
+
+% Generate random data
+numSamples = 10^5; % Number of data samples
+randomVariable1 = randn(numSamples, 1); % Random variable 1 (normally distributed)
+randomVariable2 = 2 * randn(numSamples, 1) + 1; % Random variable 2 (normally distributed with mean 1 and std dev 2)
+
+% Calculate mean and variance
+meanRV1 = mean(randomVariable1);
+varRV1 = var(randomVariable1);
+meanRV2 = mean(randomVariable2);
+varRV2 = var(randomVariable2);
+
+% Calculate joint probabilities
+%jointProbMatrix = hist3([randomVariable1, randomVariable2], [20, 20]) / numSamples;
+
+% Display results
+fprintf('Random Variable 1:\n');
+fprintf('Mean: %.4f\n', meanRV1);
+fprintf('Variance: %.4f\n\n', varRV1);
+
+fprintf('Random Variable 2:\n');
+fprintf('Mean: %.4f\n', meanRV2);
+fprintf('Variance: %.4f\n\n', varRV2);
+
+disp('Joint Probability Matrix:');
+disp(jointProbMatrix);
+
+
+% Create a histogram of the generated data
+edges = linspace(0, max(randomVariable1), 20); % Adjust as needed
+histogram(randomVariable1, edges, 'Normalization', 'probability');
+xlabel('Normal Distributed Random Variable');
+ylabel('Probability');
+title('Histogram of Normal distributed Random Variables');
+
+
+% Create a surface plot of joint probabilities
+figure;
+[X, Y] = meshgrid(linspace(min(randomVariable1), max(randomVariable1), size(jointProbMatrix, 1)), ...
+                   linspace(min(randomVariable2), max(randomVariable2), size(jointProbMatrix, 2)));
+surf(X, Y, jointProbMatrix);
+xlabel('Random Variable 1');
+ylabel('Random Variable 2');
+zlabel('Joint Probability');
+title('Joint Probability Distribution');
+
+% Create a scatter plot of the data
+figure;
+scatter(randomVariable1, randomVariable2, 10, 'filled');
+xlabel('Random Variable 1');
+ylabel('Random Variable 2');
+title('Scatter Plot of Random Variables');
+
